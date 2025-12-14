@@ -8,19 +8,22 @@
   <body>
     <nav>
       <ul>
+        {% if user.is_authenticated %}
         <li>
           <a href="{% url 'home' %}">Home</a>
         </li>
         <li>
           <a href="/tasks">Tasks</a>
         </li>
-        {% if user.is_authenticated %}
         <li>
             <a href="/logout">Logout</a>
         </li>
         {% else %}
         <li>
           <a href="/signup">Signup</a>
+        </li>
+        <li>
+          <a href="/signin">Signin</a>
         </li>
         {% endif %}
       </ul>
