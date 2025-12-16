@@ -5,7 +5,6 @@ from django.http import HttpResponse
 from django.contrib.auth import login, logout, authenticate
 from django.db import IntegrityError
 from .forms import TaskForm
-from .models import Task
 
 # Create your views here.
 
@@ -70,4 +69,15 @@ def create_task(request):
             'form':TaskForm
         })
     else:
-        return redirect('tasks')
+        try:
+            form = TaskForm(request.POST)
+            new_task = form.save(commit=False)
+            new_task.user = request.user
+            new_task.save()
+            print(new_task)
+            return redirect('tasks')
+        except ValueError:
+            return render(request, 'create_task.html',{
+                'form':TaskForm,
+                'error':'Please provide validate data' 
+            })
