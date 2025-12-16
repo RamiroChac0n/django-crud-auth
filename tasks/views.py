@@ -4,6 +4,8 @@ from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.contrib.auth import login, logout, authenticate
 from django.db import IntegrityError
+from .forms import TaskForm
+from .models import Task
 
 # Create your views here.
 
@@ -61,3 +63,11 @@ def signin(request):
 
 def tasks(request):
     return render(request, 'tasks.html')
+
+def create_task(request):
+    if request.method == 'GET':
+        return render(request, 'create_task.html',{
+            'form':TaskForm
+        })
+    else:
+        return redirect('tasks')
