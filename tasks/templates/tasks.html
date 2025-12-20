@@ -2,8 +2,10 @@
 <h1>Tasks</h1>
 
 {% for task in tasks %}
-<article>
+<a href="{% url 'task_detail' task.id %}">
+  <article>
     <h2>{{task.title}}</h2>
     <p>{{task.description}}</p>
-</article>
+  </article>
+</a>
 {% endfor %} {% endblock %}

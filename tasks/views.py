@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django.http import HttpResponse
@@ -64,6 +64,12 @@ def signin(request):
 def tasks(request):
     return render(request, 'tasks.html',{
         'tasks':Task.objects.filter(user=request.user)
+    })
+
+def task_detail(request, task_id):
+    task = get_object_or_404(Task, pk=task_id)
+    return render(request, 'task_detail.html',{
+        'task':task
     })
 
 def create_task(request):
