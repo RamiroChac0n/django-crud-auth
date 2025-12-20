@@ -1,6 +1,10 @@
 {% extends 'base.html' %} {% block content %}
+{{error}}
 <article>
-    <h1>{{task.title}}</h1>
-    <p>{{task.description}}</p>
+    <form action="" method="post">
+        {% csrf_token %}
+        {{form}}
+        <button>Save</button>
+    </form>
 </article>
 {% endblock %}
