@@ -1,11 +1,12 @@
 {% extends 'base.html' %} {% block content %}
-<h1>Tasks Pending</h1>
+<h1>Tasks</h1>
 
 {% for task in tasks %}
 <a href="{% url 'task_detail' task.id %}">
   <article>
     <h2>{{task.title}}</h2>
     <p>{{task.description}}</p>
+    <p>{{task.date_completed|date:'d M Y - H:m:s'}}</p>
   </article>
 </a>
 {% endfor %} {% endblock %}
